@@ -1,0 +1,25 @@
+; number of even elements
+
+MOV AX,0000H
+MOV DS,AX
+MOV SI,2000H
+MOV CX,[3000H]
+MOV BX,1000H   ;to store count of even numbers
+MOV [BX],0000H ;setting valur at bx to 0000h initially    
+MOV DX,1010H
+
+EVEN: MOV AX,[SI]
+      AND AX,0001H
+      CMP AX,01H    ;if ans!=0 => odd number :: ans = 0 =>even number
+      
+      ;if ans = 0 => odd number jmp without incrementing count
+      JZ NEXT
+      
+      ;ans!=0 => even element  
+      MOV DI,[BX]
+      INC DI
+      MOV [BX],DI
+NEXT: INC SI  
+      INC SI
+      DEC CX
+      JNZ EVEN

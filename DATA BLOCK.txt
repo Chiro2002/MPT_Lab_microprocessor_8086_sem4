@@ -1,0 +1,24 @@
+
+; You may customize this and other start-up templates; 
+; The location of this template is c:\emu8086\inc\0_com_template.txt
+
+org 100h
+
+MOV AX,1000H
+MOV DS,AX
+MOV SI,2000H
+MOV DI,3000H
+MOV CX,000AH ;COUNT
+DO:MOV AL,[SI]
+MOV [DI],AL
+INC SI
+INC DI
+DEC CX
+JNZ DO
+
+
+ret
+
+
+
+

@@ -1,0 +1,20 @@
+;QUE: NEGATIVE ELEMENTS
+
+MOV AX,0000H
+MOV DS,AX
+MOV SI,2000H
+MOV CX,[3000H]
+MOV BX,1000H   ;to store count of negative numbers
+MOV [BX],0000H ;setting valur at bx to 0000h initially
+NEGATIVE: MOV AX,[SI]
+   
+    AND AX,8000H ; we want to check msb thus anding it with 1000 0000 0000 0000   
+    CMP AX,8000H ; comparing with 8000=> if we get 00=>negative number else positive 
+    JNZ NEXT      
+    ; if zero => negative number 
+    MOV DI,[BX] ;taking valur at location bs in di
+    INC DI      ; increment DI=> increment the count of negative numbers
+    MOV [BX],DI
+    ;if not zero => positive number=> no need to increase count 
+    NEXT: DEC CX
+    JNZ NEGATIVE

@@ -1,0 +1,26 @@
+;QUE: NUMBER OF POSITIVE ELEMENTS 16 BIT NUMBERS SATHI INC BX 2 TIMES   
+MOV AX,0000H
+MOV DS,AX
+MOV SI,2000H
+MOV CX,[3000H]
+MOV BX,1000H   ;to store count of negative numbers
+MOV [BX],0000H ;setting valur at bx to 0000h initially        
+
+
+
+POSITIVE: MOV AL,[SI]
+   
+    AND AL,80H ; we want to check msb thus anding it with 1000 0000 0000 0000   
+    CMP AL,80H ; comparing with 8000=> if we get 00=>negative number else positive 
+    JZ NEXT      
+    ; ifnot zero => positive number 
+    MOV DI,[BX] ;taking valur at location bs in di
+    INC DI      ; increment DI=> increment the count of negative numbers
+    MOV [BX],DI 
+    
+    ;o => negative number=> no need to increase count 
+    NEXT: 
+    INC SI
+    DEC CX
+       
+    JNZ POSITIVE

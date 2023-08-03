@@ -1,0 +1,49 @@
+
+; You may customize this and other start-up templates; 
+; The location of this template is c:\emu8086\inc\0_com_template.txt
+
+org 100h
+
+;part c   
+mov ax,1100h;
+int 3h;
+ret;
+ISS:inc cx;
+    inc cx;
+    mov bx,ax;
+    mov ah,'A'; 
+    int 10h;
+    mov al,'X'; 
+    int 10h;
+    mov al,':';
+    int 10h;
+    mov dx,bx;
+    and dh,10h;
+    mov cl,04h;
+    shr dh,cl;
+    add dh,30h;
+    mov al,dh;
+    int 10h;
+    mov dx,bx;
+    and dh,01h;
+    add dh,30h;
+    mov al,dh;
+    int 10h;
+    mov dx,bx;
+    mov dl,10h;
+    mov cl,04h;
+    shr dl,cl;
+    add dl,30h;
+    mov al,dl;
+    int 10h;
+    mov dx,bx;
+    and dl,01h;
+    add dl,30h;
+    mov al,dl;
+    int 10h;
+    iret;
+    
+
+
+
+

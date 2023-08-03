@@ -1,0 +1,40 @@
+
+; You may customize this and other start-up templates; 
+; The location of this template is c:\emu8086\inc\0_com_template.txt
+
+org 100h
+
+;exp 3-A   
+;SUBROUTINE TO ADD TO two 32 bit number
+
+MOV AX,1000H    
+MOV DS,AX
+MOV SI,1000H
+MOV DI,2000H
+MOV BX,3000H
+;MOV CL,02H  ;count
+CLC ;to clear/reset carry flag
+CALL ADD_32
+
+ADD_32: MOV AX,[SI]
+ADC AX,[DI]
+MOV [BX],AX       
+INC SI
+INC SI
+INC DI
+INC DI
+INC BX
+INC BX  
+MOV AX,[SI]
+ADC AX,[DI]  
+MOV [BX],AX   
+;DEC CX
+;JNZ BACK 
+
+
+
+RET
+
+
+
+

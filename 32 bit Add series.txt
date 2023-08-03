@@ -1,0 +1,54 @@
+
+; You may customize this and other start-up templates; 
+; The location of this template is c:\emu8086\inc\0_com_template.txt
+
+org 100h
+
+;SUBROUTINE TO ADD two series of two 32 bit number
+
+MOV AX,1000H    
+MOV DS,AX
+MOV SI,1000H
+MOV DI,2000H
+MOV BX,3000H
+MOV CX,0002H  ;assume series is 10 numbers long
+;CLC ;to clear/reset carry flag    
+;MOV DX,0000H    
+FUNCTION: CALL ADD_32
+;CALL ADD_32
+HLT
+ADD_32: MOV AX,[SI]
+ADD AX,[DI]
+MOV [BX],AX       
+INC SI
+INC SI
+INC DI
+INC DI
+INC BX
+INC BX  
+MOV AX,[SI]
+ADC AX,[DI]  
+MOV [BX],AX   
+INC BX
+INC BX
+JNC LABEL
+MOV [BX],01H
+INC BX
+
+;HLT ;to end the program
+LABEL: MOV [BX],00H 
+INC SI
+INC SI
+INC DI
+INC DI
+DEC CX
+JNZ FUNCTION
+
+
+
+RET
+;ret
+
+
+
+

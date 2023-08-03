@@ -1,0 +1,54 @@
+
+; You may customize this and other start-up templates; 
+; The location of this template is c:\emu8086\inc\0_com_template.txt
+
+
+org 100h
+
+
+
+main:
+    mov aL,7Fh
+    add al,01h
+    
+    ;add ax, bx  ; This will cause an overflow
+    
+    ; Triggering the overflow interrupt
+    into
+    ;ADD AL,27h
+    mov ah, 4Ch
+    int 21h
+HLT
+isr_overflow:
+    push ax
+    push bx
+    
+    mov ah, 0EH
+    MOV AL,'O'
+    int 10h 
+    MOV AL,'V'
+    int 10h
+    MOV AL,'E'
+    int 10h
+    MOV AL,'R'
+    int 10h
+    MOV AL,'F'
+    int 10h
+    MOV AL,'L'
+    int 10h
+    MOV AL,'O'
+    int 10h
+    MOV AL,'W'
+    int 10h
+    
+    
+    pop bx
+    pop ax
+    iret
+
+
+ret
+
+
+
+
